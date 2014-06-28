@@ -1,0 +1,7 @@
+{
+  "name": "range-closest-to-xy",
+  "version": "0.0.1",
+  "tags": ["range", "closest", "distance", "position", "viewport", "coordinates"],
+  "dependencies": { },
+  "scripts": [ "index.js" ]
+}
