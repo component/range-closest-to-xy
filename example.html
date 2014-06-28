@@ -26,7 +26,7 @@
   <!-- Logic -->
   <script src="build/build.js"></script>
   <script>
-    var ctoxy = require('range-at-xy');
+    var ctoxy = require('range-closest-to-xy');
     document.body.addEventListener('mousemove', function(e) {
       var range = ctoxy(e.target, e.clientX, e.clientY);
       if (range) {
