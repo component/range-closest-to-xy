@@ -31,20 +31,23 @@ function distanceToRect(rect, x, y) {
  * @param {Node} node
  * @param {Number} x
  * @param {Number} y
+ * @param {Function} filter function
  * @param {Object} result
  */
 
-function testRects(node, x, y, result) {
+function testRects(node, x, y, fn, result) {
   var l = node.textContent.length;
   for (var i = 0; i < l; i++) {
     var range = document.createRange();
     range.setStart(node, i);
     range.setEnd(node, i+1);
     var clientRect = range.getBoundingClientRect();
-    var d = distanceToRect(clientRect, x, y);
-    if (d < result.distance) {
-      result.distance = d;
-      result.range = range;
+    if (fn(range, clientRect)) {
+      var d = distanceToRect(clientRect, x, y);
+      if (d < result.distance) {
+        result.distance = d;
+        result.range = range;
+      }
     }
   }
 }
@@ -56,16 +59,19 @@ function testRects(node, x, y, result) {
  * @param {HTMLElement} el
  * @param {Number} x
  * @param {Number} y
+ * @param {Function} an optional function returning bool to conditionally
+ *                   filter only certain ranges.
  * @api public
  */
 
-function rangeClosestToXY(el, x, y) {
+function rangeClosestToXY(el, x, y, fn) {
+  if (!fn) fn = function(range, clientRect) { return true; };
   var result = { range: null, distance: Infinity };
   var it = document.createNodeIterator(el, NodeFilter.SHOW_TEXT, null);    
   var node;
   var range;
   while (node = it.nextNode()) {
-    testRects(node, x, y, result);
+    testRects(node, x, y, fn, result);
   }
   return result.range;
 }
