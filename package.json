@@ -1,6 +1,6 @@
 {
   "name": "range-closest-to-xy",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "tags": ["range", "closest", "distance", "position", "viewport", "coordinates"],
   "repository": {
     "type": "git",
