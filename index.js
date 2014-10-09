@@ -67,7 +67,7 @@ function testRects(node, x, y, fn, result) {
 function rangeClosestToXY(el, x, y, fn) {
   if (!fn) fn = function(range, clientRect) { return true; };
   var result = { range: null, distance: Infinity };
-  var it = document.createNodeIterator(el, NodeFilter.SHOW_TEXT, null);    
+  var it = document.createNodeIterator(el, NodeFilter.SHOW_TEXT, null, false);
   var node;
   var range;
   while (node = it.nextNode()) {
